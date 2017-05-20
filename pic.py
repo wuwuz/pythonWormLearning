@@ -1,4 +1,5 @@
 # -*- coding : UTF-8 -*-
+import os
 import urllib.request
 import http.cookiejar
 import requests
@@ -27,16 +28,19 @@ cnt = 0
 
 def downloadPicture(url, fileName, threadid) : 
     try : 
+        #suf = ".jpg"
+        #if (re.search(r'.png$', url) != None) : suf = ".png"
         r = requests.get(url, "html.parser", timeout = 10, headers = head) 
-        name = "pic\\" + "tid=" + str(threadid) + "_" + fileName + '.jpg'
-        fp = open(name,'wb')
+        if (os.path.exists("pic") == False) : os.makedirs("pic")
+        name = "pic\\" + "tid=" + str(threadid) + "_" + fileName
+        fp = open(name, 'wb')
         fp.write(r.content)
         fp.close()
     except Exception as e:
         print(e)
         print("fail to open picture : ", url)
 
-for pagenum in range(2, 40) : 
+for pagenum in range(1, 40) : 
     print("now pagenum = ", pagenum, "\n")
     que = deque()
     par = {"bid" : 167, "mode" : "topic", "page" : str(pagenum)}
