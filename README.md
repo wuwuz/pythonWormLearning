@@ -1,4 +1,4 @@
-﻿# pythonWormLearning
+# pythonWormLearning
 python Worm for PKU BBS
 
 using package : 
